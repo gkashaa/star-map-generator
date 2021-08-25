@@ -1,0 +1,1 @@
+# star-map-generator
