@@ -6,7 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Star Map Generator</title>
 </head>
+
 <body>
-    
+    <div class="latitude_input_group">
+        <label for="latitude">Latitude: </label>
+        <input type="number" required id="latitude" name="latitude" min="-90.0000000" max="90.0000000" step="0.1">
+        <span class="validity"></span>
+    </div>
+    <br>
+    <br>
+    <div class="user_longitude_group">
+        <label for="longitude">Longitude: </label>
+        <input type="number" required id="longitude" name="longitude" min="-180.0000000" max="180.0000000" step="0.0000001">
+        <span class="validity"></span>
+    </div>
+    <br>
+    <br>
+    <div>
+        <label for="user_date">Date: </label>
+        <input type="date" required id="user_date" name="date" min="1900-01-01" max="2100-01-01">
+    </div>
+    <br>
+    <br>
+    <div>
+        <label for="user_time">Time: </label>
+        <input type="time" required id="user_time" name="time" required>
+    </div>
+    <br>
+    <br>
+    <div>
+        <input type="submit" value="Generate">
+    </div>
 </body>
+<script src="js/script.js"></script>
 </html>
