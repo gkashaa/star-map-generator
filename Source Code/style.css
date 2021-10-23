@@ -1,26 +1,164 @@
 /*stylesheet for star map generator*/
-/*div {
-    margin-bottom: 10px;
-    position: relative;
-  }
-  
-  input[type="number"] {
-    width: 100px;
-  }
-  
-  input + span {
-    padding-right: 30px;
-  }
-  
-  input:invalid+span:after {
-    position: absolute;
-    content: '✖';
-    padding-left: 5px;
-  }
-  
-  input:valid+span:after {
-    position: absolute;
-    content: '✓';
-    padding-left: 5px;
-  }
-*/
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+body {
+  /*background: #fbf3ff;*/
+  background-image: url("galaxy.jpg");
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+} 
+p {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 200;
+}
+.container {
+  position: absolute;
+  max-width: 900px;
+  height: 500px;
+  margin: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+} 
+.myRightCtn {
+  position: relative;
+  background-image: linear-gradient(45deg, #0000CD, #000080);
+  border-radius: 25px;
+  height: 100%;
+  padding: 25px;
+  color: rgb(192, 192, 192);
+  font-size: 12px; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.myRightCtn label {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;;
+  padding-right: 10px;
+}
+.myLeftCtn {
+  position: relative;
+  background: #fff;
+  border-radius: 25px;
+  height: 100%;
+  padding: 25px;
+} 
+.myLeftCtn header {
+  color: #0000CD;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+.myLeftCtn label {
+  color: #0000CD;
+  font-size: 14px;
+  font-weight: 500;
+  margin-left: -50px;
+  padding-right: 10px;
+}
+.row{
+height: 100%;
+} 
+.myCard {
+  position: relative;
+  background: #fff;
+  height: 100%;
+  border-radius: 25px;
+  -webkit-box-shadow: 0px 10px 40px -10px rgba(0, 0, 0, 0.7);
+  -moz-box-shadow: 0px 10px 40px -10px rgba(0, 0, 0, 0.7);
+  box-shadow: 0px 10px 40px -10px rgba(0, 0, 0, 0.7);
+} 
+.myRightCtn header {
+  color: #fff;
+  font-size: 24px;
+  font-weight: 700;
+}
+.myRightCtn .myInput {
+  width: 230px;
+  border-radius: 25px;
+  padding: 12px;
+  padding-left: 20px;
+  margin-bottom: 10px;
+  border: none;
+  -webkit-box-shadow: 0px 10px 49px -14px rgba(0, 0, 0, 0.7);
+  -moz-box-shadow: 0px 10px 49px -14px rgba(0, 0, 0, 0.7);
+  box-shadow: 0px 10px 49px -14px rgba(0, 0, 0, 0.7);
+}
+.myRightCtn .myInput:focus {
+  outline: none;
+} 
+.box {
+  position: relative;
+  margin: 20px;
+} 
+.myLeftCtn .myInput {
+  width: 230px;
+  border-radius: 25px;
+  padding: 10px;
+  padding-left: 20px;
+  border: none;
+  -webkit-box-shadow: 0px 10px 49px -14px rgba(0, 0, 0, 0.7);
+  -moz-box-shadow: 0px 10px 49px -14px rgba(0, 0, 0, 0.7);
+  box-shadow: 0px 10px 49px -14px rgba(0, 0, 0, 0.7);
+}
+.myLeftCtn .myInput:focus {
+  outline: none;
+} 
+.myLeftCtn .myInputSpecial {
+  width: 100px;
+  border-radius: 25px;
+  padding: 10px;
+  padding-left: 20px;
+  border: none;
+  -webkit-box-shadow: 0px 10px 49px -14px rgba(0, 0, 0, 0.7);
+  -moz-box-shadow: 0px 10px 49px -14px rgba(0, 0, 0, 0.7);
+  box-shadow: 0px 10px 49px -14px rgba(0, 0, 0, 0.7);
+}
+.myForm {
+  position: relative;
+  margin-top: 30px;
+} 
+.myLeftCtn .butt {
+  background: linear-gradient(45deg, #0000CD, #000080);
+  color: #fff;
+  width: 230px;
+  border: none;
+  border-radius: 25px;
+  padding: 10px;
+  margin-top: 20px;
+  -webkit-box-shadow: 0px 10px 41px -11px rgba(0, 0, 0, 0.7);
+  -moz-box-shadow: 0px 10px 41px -11px rgba(0, 0, 0, 0.7);
+  box-shadow: 0px 10px 41px -11px rgba(0, 0, 0, 0.7);
+} 
+.myLeftCtn .butt:hover {
+  background: linear-gradient(45deg, #4169E1, #0000FF);
+}
+.myLeftCtn .butt:focus {
+  outline: none;
+} 
+.butt_out {
+  background: transparent;
+  color: #fff;
+  width: 120px;
+  border: 2px solid#fff;
+  border-radius: 25px;
+  padding: 10px;
+  margin-top: 30px;
+  margin-left: 105px;
+  -webkit-box-shadow: 0px 10px 49px -14px rgba(0, 0, 0, 0.7);
+  -moz-box-shadow: 0px 10px 49px -14px rgba(0, 0, 0, 0.7);
+  box-shadow: 0px 10px 49px -14px rgba(0, 0, 0, 0.7);
+} 
+.butt_out:hover {
+  border: 2px solid#eecbff;
+} 
+.butt_out:focus {
+  outline: none;
+}
