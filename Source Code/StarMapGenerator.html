@@ -17,14 +17,32 @@
                             <header>Enter values for Starmap:</header>
                             <div class="form-group">
                                 <label for="latitude">Latitude: </label>
-                                <input class="myInputSpecial" type="number" id="latitude" min="-90.0000000" max="90.0000000" step="0.1" placeholder="deg" required> 
-                                <input class="myInputSpecial" type="number" id="latitudeMins" min="0" max="60" step="1" placeholder="mins" required> 
+                                <input class="myInputSpecial" type="number" id="latitudeDegs" min="-90" max="90" step="1" placeholder="deg" required> 
+                                <input class="myInputSpecial" type="number" id="latitudeMins" min="0" max="59" step="1" placeholder="mins" required> 
+                                <input class="myInputSpecial" type="number" id="latitudeSecs" min="0" max="59" step="1" placeholder="secs" required> 
+                                
+                            </div>
+
+                            <div class="form-group">
+                                <label for="cardinalDirectionNS" class="specialLabel">N</label>
+                                <input class="myInputSpecial" type="radio" id="cardinalDirectionN" name="directionNS" required>
+                                <label for="cardinalDirectionNS" class="specialLabel">S</label>
+                                <input class="myInputSpecial" type="radio" id="cardinalDirectionS" name="directionNS" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="longitude">Longitude: </label>
-                                <input class="myInputSpecial" type="number" id="longitude" min="-180.0000000" max="180.0000000" step="0.1" placeholder="deg" required> 
-                                <input class="myInputSpecial" type="number" id="longitudeMins" min="0" max="60" step="1" placeholder="mins" required> 
+                                <input class="myInputSpecial" type="number" id="longitudeDegs" min="-180" max="180" step="1" placeholder="deg" required> 
+                                <input class="myInputSpecial" type="number" id="longitudeMins" min="0" max="59" step="1" placeholder="mins" required> 
+                                <input class="myInputSpecial" type="number" id="longitudeSecs" min="0" max="59" step="1" placeholder="secs" required>
+                                
+                            </div>
+
+                            <div class="form-group">
+                                <label for="cardinalDirectionEW" class="specialLabel">E</label>
+                                <input class="myInputSpecial" type="radio" id="cardinalDirectionE" name="directionEW" required>
+                                <label for="cardinalDirectionEW" class="specialLabel">W</label>
+                                <input class="myInputSpecial" type="radio" id="cardinalDirectionW" name="directionEW" required>
                             </div>
 
                             <div class="form-group">
