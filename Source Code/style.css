@@ -176,6 +176,7 @@ height: 100%;
   outline: none;
 } 
 .butt_out {
+  background: #0000CD;
   color: #fff;
   width: 120px;
   border: 2px solid#fff;
