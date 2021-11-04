@@ -27,5 +27,5 @@ svg.append("path")
     .attr("d", path(graticule))
     .attr("fill", "none")
     .attr("stroke", "black")
-    .attr("stroke-opacity", 0.7);
+    .attr("stroke-opacity", 1);
 
