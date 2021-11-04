@@ -19,13 +19,13 @@
                                 <label for="latitude">Latitude: </label>
                                 <input class="myInputSpecial" type="number" id="latitudeDegs" min="-90" max="90" step="1" placeholder="deg" required> 
                                 <input class="myInputSpecial" type="number" id="latitudeMins" min="0" max="59" step="1" placeholder="mins" required> 
-                                <input class="myInputSpecial" type="number" id="latitudeSecs" min="0" max="59" step="1" placeholder="secs" required> 
+                                <input class="myInputSpecial" type="number" id="latitudeSecs" min="0" max="59" step="0.000001" placeholder="secs" required> 
                                 
                             </div>
 
                             <div class="form-group">
                                 <label for="cardinalDirectionNS" class="specialLabel">N</label>
-                                <input class="myInputSpecial" type="radio" id="cardinalDirectionN" name="directionNS" required>
+                                <input class="myInputSpecial" type="radio" id="cardinalDirectionN" name="directionNS" required checked>
                                 <label for="cardinalDirectionNS" class="specialLabel">S</label>
                                 <input class="myInputSpecial" type="radio" id="cardinalDirectionS" name="directionNS" required>
                             </div>
@@ -34,13 +34,13 @@
                                 <label for="longitude">Longitude: </label>
                                 <input class="myInputSpecial" type="number" id="longitudeDegs" min="-180" max="180" step="1" placeholder="deg" required> 
                                 <input class="myInputSpecial" type="number" id="longitudeMins" min="0" max="59" step="1" placeholder="mins" required> 
-                                <input class="myInputSpecial" type="number" id="longitudeSecs" min="0" max="59" step="1" placeholder="secs" required>
+                                <input class="myInputSpecial" type="number" id="longitudeSecs" min="0" max="59" step="0.000001" placeholder="secs" required>
                                 
                             </div>
 
                             <div class="form-group">
                                 <label for="cardinalDirectionEW" class="specialLabel">E</label>
-                                <input class="myInputSpecial" type="radio" id="cardinalDirectionE" name="directionEW" required>
+                                <input class="myInputSpecial" type="radio" id="cardinalDirectionE" name="directionEW" required checked>
                                 <label for="cardinalDirectionEW" class="specialLabel">W</label>
                                 <input class="myInputSpecial" type="radio" id="cardinalDirectionW" name="directionEW" required>
                             </div>
@@ -76,10 +76,6 @@
                                         <label for="preset">Preset Locations: </label>
                                         <select class = "myInput" name = "dropdown">
                                             <option value="" disabled selected>Select location</option>
-                                            <option value = "Huntsville">Huntsville</option>
-                                            <option value = "New York City">New York City</option>
-                                            <option value = "Paris">Paris</option>
-                                            <option value = "London">London</option>
                                          </select> 
                                     </div>
                                 </form>
@@ -94,6 +90,7 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
- <script src="js/script.js"></script>
+<script src="js/script.js"></script>
 </body>
 </html>
+
