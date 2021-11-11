@@ -20,12 +20,24 @@ var svg = d3.select("body")
     .append("svg")
     .attr("viewBox", [0, 0, width, height])
     .attr("fill", "currentColor")
+    .style("background", "black")
     .style("margin", "-10");
 
 // Add another SVG element (for the graticule)
 svg.append("path")
     .attr("d", path(graticule))
     .attr("fill", "none")
-    .attr("stroke", "black")
+    .attr("stroke", "white")
     .attr("stroke-opacity", 1);
 
+d3.json("https://raw.githubusercontent.com/pnavarrc/workshop-d3-maps/master/data/hyg.json", function(error, data) {
+    if (error) throw error;
+
+    svg.selectAll("path")
+        .data(data.features)
+        .enter()
+        .append("path")
+        .style("color", "white")
+        .attr("d", path);
+
+});
