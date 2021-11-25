@@ -325,6 +325,9 @@ class Math
     // hemisphere(hemi) 0 = South, 1 = North
     // direction(dir) 0 = West, 1 = East
     function altitudeAzimuth(){
+        var alt;
+        var az;
+        
         if(hemi == 0)
         {
             lat = lat * -1.0;
