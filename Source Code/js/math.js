@@ -344,20 +344,20 @@ class Math
         var latRad = Lat * RADS;
         var hrRad = hourAngle * RADS;
         // Calculate altitude in radians
-        sin_alt = (sin(decRad) * sin(latRad)) + (cos(decRad) * cos(latRad) * cos(hrRad));
-        alt = asin(sin_alt);
+        var sin_alt = (Math.sin(decRad) * Math.sin(latRad)) + (Math.cos(decRad) * Math.cos(latRad) * Math.cos(hrRad));
+        var alt = Math.asin(sin_alt);
         // Calculate azimuth in radians (you will need to handle this inside of a try...catch
         //  in case the latitude is at the poles or altitude if 90 degrees
         try
-            cos_az = (sin(decRad) – sin(alt) * sin(latRad)) / (cos(alt) * cos(latRad));
-            az = acos(cos_az);
+            cos_az = (Math.sin(decRad) – Math.sin(alt) * Math.sin(latRad)) / (Math.cos(alt) * Math.cos(latRad));
+            az = Math.acos(cos_az);
         catch
             az = 0;
         // Convert altitude and azimuth to degrees
         alt *= DEG;
         az *= DEG;
-        if(sin(hrRad > 0.0){
-            az = 360.0 – az
+        if(Math.sin(hrRad) > 0.0){
+            az = 360.0 – az;
         }
         return az;
     }
