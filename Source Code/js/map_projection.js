@@ -2,6 +2,7 @@
 var width = 5000;       
 var height = 5000;      
 
+
 // Create and configure stereographic projection
 var projection = d3.geoStereographic()
     .scale(800)
@@ -30,14 +31,86 @@ svg.append("path")
     .attr("stroke", "white")
     .attr("stroke-opacity", 1);
 
-d3.json("https://raw.githubusercontent.com/pnavarrc/workshop-d3-maps/master/data/hyg.json", function(error, data) {
+d3.csv("hyg.csv", function(error, data) {
     if (error) throw error;
+    
+    
+    // add the stars to the map projection
+    svg.selectAll("circle")
+		.data(data)
+                .enter()
+		.append("circle")
+        
+                
+		.attr("cx", function (d) { 
+                     if (d.mag <= 6)
+                            return projection(azimuthElevation(d.RA, d.Dec))[0]; }) // Right Acension -> Azimuth
+                         
+                
+		.attr("cy", function (d) { 
+                     if (d.mag <= 6)
+                            return projection(azimuthElevation(d.RA, d.Dec))[1]; }) // Declination -> Elevation
+                            
+                      
+        // Magnitude of the stars (not done)
+		.attr("r", function (d) {
+                    if (Math.sign(d.mag) === -1) {      // Checks for negative magnitudes
+                        d.mag = -(d.mag);
+                        return (d.mag); 
+                    }
+                        return (d.mag); 
+                    }) 
+    
+		.attr("fill", "white");
+    
+    
+    
+    // add the name for each star
+     svg.selectAll("text")
+                .data(data)
+                .enter()
+		.append("text")
+                
+                .attr("x", d => projection(azimuthElevation(d.RA, d.Dec))[0])
+                        
+		.attr("y", d => projection(azimuthElevation(d.RA, d.Dec))[1])
+                
+                .attr("dy", -7) // set y position of bottom of text
+                .style("fill", "aqua")
+                .text((d) => d.name); 
+     
+            
+d3.json("constellations.json", function(error, co) {
+    if (error) throw error;     
+   
+        
+        // create constellations 
+         var pLine = d3.line()
+            .x(function(p) { return (projection(azimuthElevation(p.ra, p.dec))[0]); })
+            .y(function(p) { return (projection(azimuthElevation(p.ra, p.dec))[1]); })
+            .defined(function (p) { return (p.space) !== null; });
+            
+    
+            // add the constellations
+            svg.append("path")
+                .data(data)
+                .attr("d", pLine(co))
+                .attr("fill", "none")
+                .attr("stroke", "#8ae8ff")
+                .attr("stroke-width", "2");
+      
+            // add the constellation names
+            svg.selectAll("text")
+                .data(co)
+                .enter()
+                .append("text")
+                .attr("x", function(p) { return ((projection(azimuthElevation(p.ra, p.dec))[0]) + 10); })
+                .attr("y", function(p) { return (projection(azimuthElevation(p.ra, p.dec))[1]); })
+                .attr("fill", "#fffb8a")
+                .text(function(p) { return (p.con); });
 
-    svg.selectAll("path")
-        .data(data.features)
-        .enter()
-        .append("path")
-        .style("color", "white")
-        .attr("d", path);
-
-});
+            
+    });
+    
+    
+ });
