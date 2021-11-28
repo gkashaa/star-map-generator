@@ -1,23 +1,46 @@
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Star Map Generator</title>
-</head>
-<body>
-    <input type="checkbox" id="constellationLabel" name="constellationLabel" value="label">
-    <label for="constellationLabel"> Major constellation labels</label><br>
-    <input type="checkbox" id="starLabel" name="starLabel" value="label">
-    <label for="starLabel"> Star labels</label><br>
-    <input type="checkbox" id="planetLabel" name="planetLabel" value="label">
-    <label for="planetLabel"> Planet labels</label><br>
-    <input type="checkbox" id="planetIcon" name="planetIcon" value="icon">
-    <label for="planetIcon"> Planet icons</label><br>
-    <input type="checkbox" id="messierLabel" name="messierLabel" value="label">
-    <label for="messierLabel"> Messier deep space object labels</label><br><br><br>
-</body>
-<script src="https://d3js.org/d3.v4.js"></script>
-<script src="//d3js.org/topojson.v1.min.js"></script>
-<script src="js/map_projection.js"></script>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Star Map Generator</title>
+        <style>
+            body {
+                background-color: #1f1f1f;
+            }
+
+            label {
+                color: white;
+                margin-right: 20px;
+            }
+
+            input[type=checkbox]:hover {
+                box-shadow:0px 0px 10px #1300ff;
+            }
+        </style>
+    </head>
+    <body>
+
+
+        <script src="https://d3js.org/d3.v4.js"></script>
+        <script src="//d3js.org/topojson.v1.min.js"></script>
+        <script src="js/map_projection.js"></script>
+        <script src="js/script.js"></script>
+
+
+        <div id = "checkBox">
+            <div style = "display: flex; align-items: center; justify-content:center">
+                <input type="checkbox" id="constellationLabel" name="constellationLabel" value="label">
+                <label for="constellationLabel"> Major constellation labels</label>
+                <input type="checkbox" id="starLabel" name="starLabel" value="label">
+                <label for="starLabel"> Star labels</label>
+                <input type="checkbox" id="planetLabel" name="planetLabel" value="label">
+                <label for="planetLabel"> Planet labels</label>
+                <input type="checkbox" id="planetIcon" name="planetIcon" value="icon">
+                <label for="messierLabel"> Messier DSO labels</label>
+            </div>
+        </div>
+    </body>
 </html>
+
+
