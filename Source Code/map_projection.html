@@ -17,6 +17,16 @@
             input[type=checkbox]:hover {
                 box-shadow:0px 0px 10px #1300ff;
             }
+            .downLoadBtn {
+                display: inline-block;
+                background: #fff;
+                color: #000;
+                text-decoration: none;
+                font-weight: 700;
+                font-size: 0.9em;
+                padding: 0.6em 1.3em;
+                border-radius: 0.3em;
+            }
         </style>
     </head>
     <body>
@@ -29,7 +39,7 @@
 
 
         <div id = "checkBox">
-            <div style = "display: flex; align-items: center; justify-content:center">
+            <div style = "display: flex; align-items: center; justify-content:center; padding-top: 1.5em; padding-bottom: 1.5em;">
                 <input type="checkbox" id="constellationLabel" name="constellationLabel" value="label">
                 <label for="constellationLabel"> Major constellation labels</label>
                 <input type="checkbox" id="starLabel" name="starLabel" value="label">
@@ -40,7 +50,11 @@
                 <label for="messierLabel"> Messier DSO labels</label>
             </div>
         </div>
+        <div class="download">
+            <div style = "display: flex; align-items: center; justify-content:center">
+                <label for="buttonLabel">Download </label>
+                <a class="downLoadBtn" href="#"><i class="fas fa-download"></i>JPEG Image</a>
+            </div>
+        </div>
     </body>
 </html>
-
-
