@@ -9,4 +9,4 @@ Project Developed by:
 Colton Cappa,
 Gloria Kashaa,
 Jared Nicoll,
-Leonie Nutz,
+Leonie Nutz
