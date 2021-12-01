@@ -29,7 +29,6 @@ class StarMath{
 
 
 // Functions to convert trig functions to degrees
-
 function sin(x) {
     return (Math.sin(x * (Math.PI / 180)));
 }
