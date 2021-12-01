@@ -1,3 +1,6 @@
+// StarMath object
+var star = new StarMath(-6.7924, 39.2083, 22.0984235779);
+
 // Dimensions of the projection
 var width = 5000;       
 var height = 5000;      
@@ -31,8 +34,11 @@ svg.append("path")
     .attr("stroke", "white")
     .attr("stroke-opacity", 1);
 
+
+
 d3.csv("hyg.csv", function(error, data) {
     if (error) throw error;
+
     
     // Add the stars to the map projection
     svg.selectAll("circle")
@@ -41,14 +47,15 @@ d3.csv("hyg.csv", function(error, data) {
 		.append("circle")
 		.attr("cx", function (d) { 
                      if (d.Mag <= 6)
-                            return projection(azimuthElevation(d.RA, d.Dec))[0]; }) // Right Acension -> Azimuth
+                            return projection(star.azimuthElevation(d.RA, d.Dec))[0]; }) // Right Acension -> Azimuth
                 
 		.attr("cy", function (d) { 
                      if (d.Mag <= 6)
-                            return projection(azimuthElevation(d.RA, d.Dec))[1]; }) // Declination -> Altitide
+                            return projection(star.azimuthElevation(d.RA, d.Dec))[1]; }) // Declination -> Altitide
                              
 		.attr("r", "2px")  // Magnitude of the stars (not done)
 		.attr("fill", "white");
+                
     
         
     // Add the name for each star
@@ -56,8 +63,8 @@ d3.csv("hyg.csv", function(error, data) {
                .data(data)
                .enter()
                .append("text")
-               .attr("x", d => projection(azimuthElevation(d.RA, d.Dec))[0] + 10)
-               .attr("y", d => projection(azimuthElevation(d.RA, d.Dec))[1])
+               .attr("x", d => projection(star.azimuthElevation(d.RA, d.Dec))[0] + 10)
+               .attr("y", d => projection(star.azimuthElevation(d.RA, d.Dec))[1])
                .style("fill", "white")
                .text((d) => d.ProperName);
         
@@ -77,54 +84,51 @@ d3.csv("hyg.csv", function(error, data) {
     
   
   
-});            
-     
-   
-d3.json("constellations.json", function(error, co) {
-    if (error) throw error;     
-
-        
-    // Create constellations 
-    var pLine = d3.line()
-       .x(function(p) { if (p.new_line !== null) return (projection(azimuthElevation(p.ra, p.dec))[0]); })
-       .y(function(p) { if (p.new_line !== null) return (projection(azimuthElevation(p.ra, p.dec))[1]); })
-       .defined(function (p) { return (p.new_line) !== null; });
+	d3.json("constellations.json", function(error, cons) {
+	    if (error) throw error;     
 
 
-    // Add the constellations
-    svg.append("path")
-        .data(co)
-        .attr("d", pLine(co))
-        .attr("fill", "none")
-        .attr("stroke", "#8ae8ff")
-        .attr("stroke-width", "2");
+	    // Create constellations 
+	    var pLine = d3.line()
+	       .x(function(p) { if (p.new_line !== null) return (projection(star.azimuthElevation(p.ra, p.dec))[0]); })
+	       .y(function(p) { if (p.new_line !== null) return (projection(star.azimuthElevation(p.ra, p.dec))[1]); })
+	       .defined(function (p) { return (p.new_line) !== null; });
 
 
-    // Add the constellation names
-    var con_name = svg.selectAll("#figure_text")
-        .data(co)
-        .enter()
-        .append("text")
-        .attr("x", function(p) { if (p.new_line !== null) return ((projection(azimuthElevation(p.ra, p.dec))[0]) + 30); })
-        .attr("y", function(p) { if (p.new_line !== null) return ((projection(azimuthElevation(p.ra, p.dec))[1])); })
-        .attr("fill", "#fffb8a")
-        .text(function(p) { 
-                    return (p.con); });
+	    // Add the constellations
+	    svg.append("path")
+		.data(cons)
+		.attr("d", pLine(cons))
+		.attr("fill", "none")
+		.attr("stroke", "#8ae8ff")
+		.attr("stroke-width", "2")
+		.attr("opacity", 0);        // Hides the constellations
 
 
-    // Checkbox to show/hide constellation labels
-    var checkbox_2 = document.getElementById('constellationLabel');     
+	    // Add the constellation names
+	    var con_name = svg.selectAll("#figure_text")
+		.data(cons)
+		.enter()
+		.append("text")
+		.attr("x", function(p) { if (p.new_line !== null) return ((projection(star.azimuthElevation(p.ra, p.dec))[0]) + 30); })
+		.attr("y", function(p) { if (p.new_line !== null) return ((projection(star.azimuthElevation(p.ra, p.dec))[1])); })
+		.attr("fill", "#fffb8a")
+		.text(function(p) { 
+			    return (p.con); });
 
 
-    // Checkbox listener for the constellation label checkbox
-    checkbox_2.addEventListener('change', (event) => {      
-        if (event.currentTarget.checked) {
-          con_name.attr("opacity", 0);        // Hide labels if checkbox is checked                      
-        } else {
-          con_name.attr("opacity", 1);       // Show labels if checkbox is unchecked 
-        }
-      });
+	    // Checkbox to show/hide constellation labels
+	    var checkbox_2 = document.getElementById('constellationLabel');     
 
 
+	    // Checkbox listener for the constellation label checkbox
+	    checkbox_2.addEventListener('change', (event) => {      
+		if (event.currentTarget.checked) {
+		  con_name.attr("opacity", 0);        // Hide labels if checkbox is checked                      
+		} else {
+		  con_name.attr("opacity", 1);       // Show labels if checkbox is unchecked 
+		}
+	      });
 
-});
+    	});
+}); 
