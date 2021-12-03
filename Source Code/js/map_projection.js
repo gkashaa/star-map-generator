@@ -44,7 +44,7 @@ svg.append("path")
 
 
 
-d3.csv("hyg.csv", function(error, data) {
+d3.csv("https://raw.githubusercontent.com/gkashaa/star-map-generator/main/Source%20Code/hyg.csv", function(error, data) {
     if (error) throw error;
 
 
@@ -98,7 +98,7 @@ d3.csv("hyg.csv", function(error, data) {
            
      
    
-d3.json("constellations.json", function(error, cons) {
+d3.json("https://raw.githubusercontent.com/gkashaa/star-map-generator/main/Source%20Code/constellations.json", function(error, cons) {
     if (error) throw error;     
 
         
