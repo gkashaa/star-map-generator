@@ -87,9 +87,9 @@ d3.csv("https://raw.githubusercontent.com/gkashaa/star-map-generator/main/Source
     // Checkbox listener for the star label checkbox
     checkbox.addEventListener('change', (event) => {
         if (event.currentTarget.checked) {
-          star_name.attr("opacity", 0);        // Hide labels if checkbox is checked
+          star_name.attr("opacity", 1);        // Show labels if checkbox is checked
         } else {
-          star_name.attr("opacity", 1);        // Show labels if checkbox is unchecked
+          star_name.attr("opacity", 0);        // Hide labels if checkbox is unchecked
         }
     });
     
@@ -138,9 +138,9 @@ d3.json("https://raw.githubusercontent.com/gkashaa/star-map-generator/main/Sourc
     // Checkbox listener for the constellation label checkbox
     checkbox_2.addEventListener('change', (event) => {      
         if (event.currentTarget.checked) {
-          con_name.attr("opacity", 0);        // Hide labels if checkbox is checked                      
+          con_name.attr("opacity", 1);        // Show labels if checkbox is checked                      
         } else {
-          con_name.attr("opacity", 1);       // Show labels if checkbox is unchecked 
+          con_name.attr("opacity", 0);       // Hide labels if checkbox is unchecked 
         }
       });
 
