@@ -62,7 +62,8 @@ d3.csv("hyg.csv", function(error, data) {
                      if (d.Mag <= 6)
                             return projection(star.azimuthElevation(d.RA, d.Dec))[1]; }) // Declination -> Altitide
                              
-		.attr("r", "2px")  // Magnitude of the stars (not done)
+		.attr("r", function (d) { 
+                            return (magnitude(d.Mag)); })  // Magnitude of the stars
 		.attr("fill", "white");
                 
                 
