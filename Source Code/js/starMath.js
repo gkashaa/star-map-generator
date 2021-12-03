@@ -34,6 +34,7 @@ function magnitde (mag) {
         var n = 3;
         var e;
         
+        // Range between the largest magnitude (-26) and the smallest magnitude (6)
         for (var i = 0; i < 33; i++) {
             
                 if (parseInt(mag) === m)
