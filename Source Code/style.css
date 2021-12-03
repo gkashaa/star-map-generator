@@ -1,11 +1,11 @@
-/*stylesheet for star map generator*/
+/*Colton Cappa, Gloria Kashaa, Jared Nicoll, Leonie Nutz*/
+/*stylesheet for star map generator landing page*/
 *{
   margin:0;
   padding:0;
   box-sizing:border-box;
 }
 body {
-  /*background: #fbf3ff;*/
   background-image: url("galaxy.jpg");
   height: 100%;
   background-position: center;
