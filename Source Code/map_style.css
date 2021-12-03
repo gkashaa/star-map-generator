@@ -1,0 +1,42 @@
+body {
+    background-color: #1f1f1f;
+}
+label {
+    color: white;
+    margin-right: 20px;
+}
+input[type=checkbox]:hover {
+    box-shadow:0px 0px 10px #1300ff;
+}
+.downLoadBtn {
+    display: inline-block;
+    background: #fff;
+    color: #000;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.9em;
+    padding: 0.6em 1.3em;
+    border-radius: 0.3em;
+}
+#checkBox{
+    display: flex; 
+    align-items: center; 
+    justify-content:center; 
+    padding-top: 1em; 
+    padding-bottom: 1em;
+}
+#download{
+    display: flex; 
+    align-items: center; 
+    justify-content:center;
+}
+/* [FOOTER] */
+#page-foot {
+    padding-bottom: 10px;
+    margin-top: 30px;
+    background: #000;
+    position: fixed; 
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
