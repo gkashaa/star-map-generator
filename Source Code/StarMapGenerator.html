@@ -1,8 +1,11 @@
+<!--Colton Cappa, Gloria Kashaa, Jared Nicoll, Leonie Nutz-->
+<!--HTML file for the landing page of the star map generator-->
 <!DOCTYPE html>
 <html>
 <head>
     <title>Star Map Generator</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Import style sheets-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
     <link rel="stylesheet" href="style.css">
@@ -13,23 +16,25 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="myLeftCtn"> 
+                        <!--Form style with action attribute to submit data to html file displaying the star map-->
                         <form class="myForm text-center" target="blank" action="map_projection.html">
                             <header>Enter values for Star Map:</header>
                             <div class="form-group">
+                                <!--Latitude input-->
                                 <label for="latitude">Latitude: </label>
                                 <input class="myInputSpecial" type="number" id="latitudeDegs" min="-90" max="90" step="1" placeholder="deg" required> 
                                 <input class="myInputSpecial" type="number" id="latitudeMins" min="0" max="59" step="1" placeholder="mins" required> 
                                 <input class="myInputSpecial" type="number" id="latitudeSecs" min="0" max="59" step="0.000001" placeholder="secs" required> 
                                 
                             </div>
-
+                            <!--Cardinal direction N/S input-->
                             <div class="form-group">
                                 <label for="cardinalDirectionNS" class="specialLabel">N</label>
                                 <input class="myInputSpecial" type="radio" id="cardinalDirectionN" name="directionNS" required checked>
                                 <label for="cardinalDirectionNS" class="specialLabel">S</label>
                                 <input class="myInputSpecial" type="radio" id="cardinalDirectionS" name="directionNS" required>
                             </div>
-
+                            <!--Longitude input-->     
                             <div class="form-group">
                                 <label for="longitude">Longitude: </label>
                                 <input class="myInputSpecial" type="number" id="longitudeDegs" min="-180" max="180" step="1" placeholder="deg" required> 
@@ -37,24 +42,24 @@
                                 <input class="myInputSpecial" type="number" id="longitudeSecs" min="0" max="59" step="0.000001" placeholder="secs" required>
                                 
                             </div>
-
+                            <!--Cardinal direction E/W input-->
                             <div class="form-group">
                                 <label for="cardinalDirectionEW" class="specialLabel">E</label>
                                 <input class="myInputSpecial" type="radio" id="cardinalDirectionE" name="directionEW" required checked>
                                 <label for="cardinalDirectionEW" class="specialLabel">W</label>
                                 <input class="myInputSpecial" type="radio" id="cardinalDirectionW" name="directionEW" required>
                             </div>
-
+                            <!--Date input-->
                             <div class="form-group">
                                 <label for="date">Date: </label>
                                 <input class="myInput" type="date" id="date" min="1900-01-01" max="2100-01-01" required> 
                             </div>
-
+                            <!--Time input-->
                             <div class="form-group">
                                 <label for="time">Time: </label>
                                 <input class="myInput" type="time" id="time" required> 
                             </div>
-
+                            <!--Button to submit user input data-->
                             <input type="submit" class="butt" value="Generate">
                             
                         </form>
@@ -63,22 +68,24 @@
                 <div class="col-md-6">
                     <div class="myRightCtn">
                             <div class="box"><header>Preset Locations</header>
-                            
                             <p>To save a preset location, fill out the text box with your desired name and click save. If you wish to select a location that is already saved, 
                                 select it from the drop-down menu.
                             </p>
                                 <form class = "myForm text-center">
                                     <div class="form-group-right">
+                                        <!--Text box for preset locationname-->
                                         <label for="locationName">Location Name: </label>
                                         <input class="myInput" type="text" id="locationName"> 
                                     </div>
                                     <div class="form-group-right">
+                                        <!--Dropdown menu containing preset locations-->
                                         <label for="preset">Preset Locations: </label>
                                         <select class = "myInput" name = "dropdown">
                                             <option value="" disabled selected>Select Location</option>
                                          </select> 
                                     </div>
                                 </form>
+                                <!--Button to save preset location-->
                                 <input type="button" class="butt_out" value="Save"/>
                             </div>
                     </div>
@@ -86,12 +93,11 @@
             </div>
         </div>
 </div>
-      
+
+<!--Import JavaScript files-->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script src="js/script.js"></script>
 <script src="js/locations.js"></script>
 </body>
 </html>
-
