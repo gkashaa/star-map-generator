@@ -28,7 +28,7 @@ class StarMath{
 
 
 // Function that display's each star's magnitude correctly 
-function magnitde (mag) {
+function magnitude (mag) {
     
         var m = 6;
         var n = 3;
