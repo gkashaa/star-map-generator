@@ -27,6 +27,24 @@ class StarMath{
 }
 
 
+// Function that display's each star's magnitude correctly 
+function magnitde (mag) {
+    
+        var m = 6;
+        var n = 3;
+        var e;
+        
+        for (var i = 0; i < 33; i++) {
+            
+                if (parseInt(mag) === m)
+                    
+                    mag = mag - (2 * n);
+            m--;
+            n--;
+        }
+        return (mag);
+}
+
 
 // Functions to convert trig functions to degrees
 function sin(x) {
