@@ -2,27 +2,14 @@ class PlanetMath{
 
     constructor(planet, YYYY, MM, DD, HH, mm, SS){
         this.planet = planet;
-        this.YYYY = YYYY;
-        this.MM = MM;
-        this.DD = DD;
-        this.HH = HH;
-        this.mm = mm;
-        this.SS = SS;
-        //  YYYY = year (e.g. 2009)
-        //  MM = month (January = 01)
+        this.YYYY = YYYY; // year
+        this.MM = MM; // month
+        this.DD = DD; // date
+        this.HH = HH; // hour
+        this.mm = mm; // minute
+        this.SS = SS; // second
         //  DD = day/hour/minutes converted to fractions of a day
-
-        var date;
-        var JD2k;
-        var JD;
-
-        var L;
-        var a;
-        var e;
-        var i;
-        var w;
-        var Omega;
-
+        var date = this.DD + (this.HH / 24) + (this.mm / 1440);
     }
 
     julianDay(){
@@ -44,116 +31,113 @@ class PlanetMath{
         A = Math.trunc(y/100);
         B = 2 - A + Math.trunc(A/4);
 
-        JD = Math.trunc(365.25 * y) + Math.trunc(30.6001 * (m + 1)) + this.DD + 1720994.5 + B;
+        JD = Math.trunc(365.25 * y) + Math.trunc(30.6001 * (m + 1)) + this.date + 1720994.5 + B;
 
         JD = Math.round((JD + Number.EPSILON) * 10) / 10;
-        this.JD = JD;
+        return JD;
     }
 
     julianDay2000(){
         var JD2k = ((367 * this.YYYY) - (Math.floor(7.0 * (this.YYYY + Math.floor((this.MM + 9.0)/12.0))/4.0)) + (Math.floor(275.0 * this.MM / 9.0)) + this.DD - 730531.5 + this.HH/24.0);
-        this.cy = JD2k / 36525;
-        this.JD2k = JD2k;
+        var cy = JD2k / 36525;
+        return [JD2k, cy];
     }
-    getJD(){
-        return this.JD;
-    }
-    getJD2k(){
-        return this.JD2k;
-    }
-    getCY(){
-        return this.cy;
-    }
-
-
+    
     majorOrbits(){
-
+        
+        var JD = this.julianDay();
+        var temp = this.julianDay2000();
+        var JD2k = temp[0];
+        var cy = temp[1];
+        
         var RADS = Math.PI / 180.0;
         var DEGS = 180 / Math.PI;
-        var cy = this.cy;
+        
+        var L, a, e, i, w, Omega;
+
 
 
     // Step 1:  Calculate the elements of the planetary orbit of the planet
         switch(this.planet){
         case 1: // Mercury
-            this.L = mod2Pi((252.25084 + 538101628.29 * cy / 3600) * RADS);
-            this.a = 0.38709893 + 0.00000066 * cy;
-            this.e = 0.20563069 + 0.00002527 * cy;
-            this.i = ( 7.00487  -  23.51 * cy / 3600) * RADS;
-            this.w = (77.45645  + 573.57 * cy / 3600) * RADS;
-            this.Omega = (48.33167 - 446.30 * cy / 3600) * RADS;
+            L = mod2Pi((252.25084 + 538101628.29 * cy / 3600) * RADS);
+            a = 0.38709893 + 0.00000066 * cy;
+            e = 0.20563069 + 0.00002527 * cy;
+            i = ( 7.00487  -  23.51 * cy / 3600) * RADS;
+            w = (77.45645  + 573.57 * cy / 3600) * RADS;
+            Omega = (48.33167 - 446.30 * cy / 3600) * RADS;
             break;
 
         case 2: // Venus
-            this.L = mod2Pi((181.97973 + 210664136.06 * cy / 3600) * RADS);
-            this.a = 0.72333199 + 0.00000092 * cy;
-            this.e = 0.00677323 - 0.00004938 * cy;
-            this.i = ( 3.39471 - 2.86 * cy / 3600) * RADS;
-            this.w = (131.53298 - 108.80 * cy / 3600) * RADS;
-            this.Omega = ( 76.68069 - 996.89 * cy / 3600) * RADS;
+            L = mod2Pi((181.97973 + 210664136.06 * cy / 3600) * RADS);
+            a = 0.72333199 + 0.00000092 * cy;
+            e = 0.00677323 - 0.00004938 * cy;
+            i = ( 3.39471 - 2.86 * cy / 3600) * RADS;
+            w = (131.53298 - 108.80 * cy / 3600) * RADS;
+            Omega = ( 76.68069 - 996.89 * cy / 3600) * RADS;
             break;
 
         case 3: // Earth/Sun
-            this.L = mod2Pi((100.46435 + 129597740.63 * cy / 3600) * RADS);
-            this.a = 1.00000011 - 0.00000005 * cy;
-            this.e = 0.01671022 - 0.00003804 * cy;
-            this.i = ( 0.00005 - 46.94 * cy / 3600) * RADS;
-            this.w = (102.94719 +  1198.28 * cy / 3600) * RADS;
-            this.Omega = (-11.26064 - 18228.25 * cy / 3600) * RADS;
+            L = mod2Pi((100.46435 + 129597740.63 * cy / 3600) * RADS);
+            a = 1.00000011 - 0.00000005 * cy;
+            e = 0.01671022 - 0.00003804 * cy;
+            i = ( 0.00005 - 46.94 * cy / 3600) * RADS;
+            w = (102.94719 +  1198.28 * cy / 3600) * RADS;
+            Omega = (-11.26064 - 18228.25 * cy / 3600) * RADS;
             break;
 
         case 4: // Mars
-            this.L = mod2Pi((355.45332 + 68905103.78 * cy / 3600) * RADS);
-            this.a = 1.52366231 - 0.00007221 * cy;
-            this.e = 0.09341233 + 0.00011902 * cy;
-            this.i = (1.85061 - 25.47 * cy / 3600) * RADS;
-            this.w = (336.04084 + 1560.78 * cy / 3600) * RADS;
-            this.Omega = ( 49.57854 - 1020.19 * cy / 3600) * RADS;
+            L = mod2Pi((355.45332 + 68905103.78 * cy / 3600) * RADS);
+            a = 1.52366231 - 0.00007221 * cy;
+            e = 0.09341233 + 0.00011902 * cy;
+            i = (1.85061 - 25.47 * cy / 3600) * RADS;
+            w = (336.04084 + 1560.78 * cy / 3600) * RADS;
+            Omega = ( 49.57854 - 1020.19 * cy / 3600) * RADS;
             break;
 
         case 5: // Jupiter
-            this.L = mod2Pi((34.40438 + 10925078.35 * cy / 3600) * RADS);
-            this.a = 5.20336301 + 0.00060737 * cy;
-            this.e = 0.04839266 - 0.00012880 * cy;
-            this.i = ( 1.30530 -  4.15 * cy / 3600) * RADS;
-            this.w = ( 14.75385 +  839.93 * cy / 3600) * RADS;
-            this.Omega = (100.55615 + 1217.17 * cy / 3600) * RADS;
+            L = mod2Pi((34.40438 + 10925078.35 * cy / 3600) * RADS);
+            a = 5.20336301 + 0.00060737 * cy;
+            e = 0.04839266 - 0.00012880 * cy;
+            i = ( 1.30530 -  4.15 * cy / 3600) * RADS;
+            w = ( 14.75385 +  839.93 * cy / 3600) * RADS;
+            Omega = (100.55615 + 1217.17 * cy / 3600) * RADS;
             break;
 
         case 6: // Saturn
-            this.L = mod2Pi((49.94432 + 4401052.95 * cy / 3600) * RADS);
-            this.a = 9.53707032 - 0.00301530 * cy;
-            this.e = 0.05415060 - 0.00036762 * cy;
-            this.i = ( 2.48446 +  6.11 * cy / 3600) * RADS;
-            this.w = ( 92.43194 - 1948.89 * cy / 3600) * RADS;
-            this.Omega = (113.71504 - 1591.05 * cy / 3600) * RADS;
+            L = mod2Pi((49.94432 + 4401052.95 * cy / 3600) * RADS);
+            a = 9.53707032 - 0.00301530 * cy;
+            e = 0.05415060 - 0.00036762 * cy;
+            i = ( 2.48446 +  6.11 * cy / 3600) * RADS;
+            w = ( 92.43194 - 1948.89 * cy / 3600) * RADS;
+            Omega = (113.71504 - 1591.05 * cy / 3600) * RADS;
             break;
 
         case 7: // Uranus
-            this.L = mod2Pi((313.23218 + 1542547.79 * cy / 3600) * RADS);
-            this.a = 19.19126393 + 0.00152025 * cy;
-            this.e = 0.04716771 - 0.00019150 * cy;
-            this.i = ( 0.76986  -  2.09 * cy / 3600) * RADS;
-            this.w = (170.96424  + 1312.56 * cy / 3600) * RADS;
-            this.Omega = ( 74.22988  - 1681.40 * cy / 3600) * RADS;
+            L = mod2Pi((313.23218 + 1542547.79 * cy / 3600) * RADS);
+            a = 19.19126393 + 0.00152025 * cy;
+            e = 0.04716771 - 0.00019150 * cy;
+            i = ( 0.76986  -  2.09 * cy / 3600) * RADS;
+            w = (170.96424  + 1312.56 * cy / 3600) * RADS;
+            Omega = ( 74.22988  - 1681.40 * cy / 3600) * RADS;
             break;
 
         case 8: // Neptune
-            this.L = mod2Pi((304.88003 + 786449.21 * cy / 3600) * RADS);
-            this.a = 30.06896348 - 0.00125196 * cy;
-            this.e = 0.00858587 + 0.00002510 * cy;
-            this.i = ( 1.76917  -  3.64 * cy / 3600) * RADS;
-            this.w = ( 44.97135  - 844.43 * cy / 3600) * RADS;
-            this.Omega = (131.72169 - 151.25 * cy / 3600) * RADS;
+            L = mod2Pi((304.88003 + 786449.21 * cy / 3600) * RADS);
+            a = 30.06896348 - 0.00125196 * cy;
+            e = 0.00858587 + 0.00002510 * cy;
+            i = ( 1.76917  -  3.64 * cy / 3600) * RADS;
+            w = ( 44.97135  - 844.43 * cy / 3600) * RADS;
+            Omega = (131.72169 - 151.25 * cy / 3600) * RADS;
             break;
 
         case 9: // Pluto
-            this.L = mod2Pi((238.92881 + 522747.90 * cy / 3600) * RADS);
-            this.a = 39.48168677 - 0.00076912 * cy;
-            this.e = 0.24880766 + 0.00006465 * cy;
-            this.i = ( 17.14175  +  11.07 * cy / 3600) * RADS;
-            this.w = (224.06676  - 132.25 * cy / 3600) * RADS;
-            this.Omega = (110.30347  -  37.33 * cy / 3600) * RADS;
+            L = mod2Pi((238.92881 + 522747.90 * cy / 3600) * RADS);
+            a = 39.48168677 - 0.00076912 * cy;
+            e = 0.24880766 + 0.00006465 * cy;
+            i = ( 17.14175  +  11.07 * cy / 3600) * RADS;
+            w = (224.06676  - 132.25 * cy / 3600) * RADS;
+            Omega = (110.30347  -  37.33 * cy / 3600) * RADS;
             break;
 
         }
@@ -181,9 +165,9 @@ class PlanetMath{
 
     // Step 5: Calculate the position of the planet in its’ orbit
 
-        var mP = mod2Pi(this.L - this.w);
-        var vP = trueAnomaly(mP, this.e);
-        var rP = this.a * (1 - Math.pow(this.e,2)) / (1 + this.e * Math.cos(vP));
+        var mP = mod2Pi(L - w);
+        var vP = trueAnomaly(mP, e);
+        var rP = a * (1 - Math.pow(e,2)) / (1 + e * Math.cos(vP));
 
     // Step 6: Calculate the heliocentric rectangular coordinates of the planet
         var xh, yh, zh;
@@ -193,9 +177,9 @@ class PlanetMath{
             zh = 0;
         }
         else{
-            xh = rP * (Math.cos(this.Omega) * Math.cos(vP + this.w - this.Omega) - Math.sin(this.Omega) * Math.sin(vP + this.w - this.Omega) * Math.cos(this.i));
-            yh = rP * (Math.sin(this.Omega) * Math.cos(vP + this.w - this.Omega) - Math.cos(this.Omega) * Math.sin(vP + this.w - this.Omega) * Math.cos(this.i));
-            zh = rP * (Math.sin(vP + this.w - this.Omega) * Math.sin(this.i));
+            xh = rP * (Math.cos(Omega) * Math.cos(vP + w - Omega) - Math.sin(Omega) * Math.sin(vP + w - Omega) * Math.cos(i));
+            yh = rP * (Math.sin(Omega) * Math.cos(vP + w - Omega) - Math.cos(Omega) * Math.sin(vP + w - Omega) * Math.cos(i));
+            zh = rP * (Math.sin(vP + w - Omega) * Math.sin(i));
         }
 
     // Step 7: Convert to geocentric rectangular coordinates
@@ -216,9 +200,7 @@ class PlanetMath{
 
         return [rightAscension, Declination, Dist];
     }
-    getP(){
-        return this.planet;
-    }
+    
 
 }
 function mod2Pi(X){
@@ -258,8 +240,6 @@ function trueAnomaly(M, e1){
 
 /*
 var mercury = new PlanetMath(1, 2000, 4, 4, 6, 8, 10);
-mercury.julianDay();
-mercury.julianDay2000();
 console.log("Mercury");
 console.log(mercury.majorOrbits());
 delete mercury;
