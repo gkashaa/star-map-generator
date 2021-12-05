@@ -21,8 +21,6 @@ class StarMath{
         var e = Math.asin((Math.sin(this.lat) * Math.sin(decl)) + (Math.cos(this.lat) * Math.cos(decl) * Math.cos(H)));
         A = (A * 180) / Math.PI;
         e = (e * 180) / Math.PI;
-
-        console.log([A, e]);
         return [A, e];
         // returns elevation then azimuth in an array.
     }
