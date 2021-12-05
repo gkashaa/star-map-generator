@@ -6,10 +6,9 @@ var width = 5000;
 var height = 5000; 
 
 // Create and configure stereographic projection
-var projection = d3.geoStereographic()
-    .scale(800)
-    .translate([width / 2, height / 2])
-    .rotate([0, -90]);
+var projection = d3.geoSatellite()
+            .scale(2500)
+            .translate([width / 2, height / 2]);
 
 // Create geographic path generator
 var path = d3.geoPath(projection);
