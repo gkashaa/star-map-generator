@@ -8,12 +8,16 @@ window.addEventListener('load', () => {
     var lat = localStorage.getItem("Latitude");
     var long = localStorage.getItem("Longitude");
   
-    var month = localStorage.getItem("Month");
-    var day = localStorage.getItem("Day");
-    var year = localStorage.getItem("Year");
+    var month = parseInt(localStorage.getItem("Month"));
+    var day = parseInt(localStorage.getItem("Day"));
+    var year = parseInt(localStorage.getItem("Year"));
     
-    var hour = localStorage.getItem("Hour");
-    var min = localStorage.getItem("Min");
+    var hour = parseInt(localStorage.getItem("Hour"));
+    var min = parseInt(localStorage.getItem("Min"));
+    
+    // Covert local time to Greenwich Mean Time
+    var GMT_hour = hour + 6;
+    var GMT_min = min;
 
     star = new StarMath(lat, long, 22.0984235779);   // Hardcoded LST
     
