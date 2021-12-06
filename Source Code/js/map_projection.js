@@ -93,7 +93,7 @@ d3.csv("https://raw.githubusercontent.com/gkashaa/star-map-generator/main/Source
                .append("text")
                .attr("x", d => projection(star.azimuthElevation(d.RA, d.Dec))[0] + 10)
                .attr("y", d => projection(star.azimuthElevation(d.RA, d.Dec))[1])
-               .style("fill", "white")
+               .style("fill", "aqua")
                .text((d) => d.ProperName);
         
         
@@ -143,7 +143,7 @@ d3.json("https://raw.githubusercontent.com/gkashaa/star-map-generator/main/Sourc
         .append("text")
         .attr("x", function(p) { if (p.new_line !== null) return ((projection(star.azimuthElevation(p.ra, p.dec))[0]) + 30); })
         .attr("y", function(p) { if (p.new_line !== null) return ((projection(star.azimuthElevation(p.ra, p.dec))[1])); })
-        .attr("fill", "#fffb8a")
+        .attr("fill", "yellow")
         .text(function(p) { 
                     return (p.con); });
 
