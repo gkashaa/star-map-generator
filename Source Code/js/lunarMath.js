@@ -6,15 +6,20 @@ class LunarMath{
     julianDay(){
         var RAD = Math.PI / 180.0;
         var k = Math.trunc((this.date - 1900.0) * 12.3685);
-
-        var T = k / 1236.85;
-
-        var JD = 2415020.75933 + (29.53058868 * k) + (0.0001178 * Math.pow(T, 2)) - (0.000000155 * Math.pow(T, 3)) + (0.00033 * Math.sin(((166.56*RAD) + ((132.87*RAD)*T) - ((0.009173*RAD)*Math.pow(T, 2)))));
+        var i = 0;
+        var JD = [0,0,0,0];
+        while(i<4){
+            var T = k / 1236.85;
+            var temp = 2415020.75933 + (29.53058868 * k) + (0.0001178 * Math.pow(T, 2)) - (0.000000155 * Math.pow(T, 3)) + (0.00033 * Math.sin(((166.56*RAD) + ((132.87*RAD)*T) - ((0.009173*RAD)*Math.pow(T, 2)))));
+            JD[i] = temp;
+            i = i + 1;
+            k = k + 0.25;
+        }
         return JD;
     }
 
-    julianToCalendar(){
-        var JD = this.julianDay() + 0.5;
+    julianToCalendar(JD){
+        var JD = JD + 0.5;
         var A, alpha;
         var m, y, dd;
 
@@ -48,13 +53,14 @@ class LunarMath{
         else{
             y = C - 4715;
         }
-        return [y, m, dd];
+        var temp = (y + (m/13) + (dd/365))
+        return temp;
     }
-// FUNCTION STILL A WORK IN PROGRESS
-    lunarLocation(){
-        var JD = this.julianDay();
+// Outputs equitorial latitude and longtitude of moon
+    lunarLocation(phase){
+        var RAD = Math.PI / 180;
+        var JD = this.julianDay()[phase];
         var T = (JD - 2415020.0) / 36525;
-
         var Lp = 70.434164 + (481267.8831*T);
         var M = 358.475833 + (35999.0498*T);
         var Mp = 296.104608 + (477198.8491*T);
@@ -63,9 +69,38 @@ class LunarMath{
 
         var E = 1 - (0.002495*T) - (0.00000752*Math.pow(T,2));
 
-        //var lon = Lp + (6.288750 * math.sin(Mp*RAD)) + (1.274018 * math.sin((2*D - Mp)*RAD)) + (0.658309 * math.sin(2*D)) + (0.213616 * math.sin(2Mp)) - (0.185596 * math.sin(M) * E) - (0.114336 * math.sin(2*F)) + (0.058793 * math.sin((2*D) - (2*Mp))) + (0.057212 * math.sin((2*D) - M - Mp) * E) + (0.053320 * math.sin(2*D + Mp)) + (0.045874 * math.sin(2*D - M) * E);
-        var lat;
-        return E;
-        //return [lon, lat];
+        var lon = Lp + (6.288750 * Math.sin(Mp*RAD)) + (1.274018 * Math.sin((2*D-Mp)*RAD)) + (0.658309 * Math.sin(2*D*RAD)) + (0.213616 * Math.sin(2*Mp*RAD)) - (0.185596 * Math.sin(M*RAD)*E) - (0.114336 * Math.sin(2*F*RAD)) + (0.058793*Math.sin(((2*D)-(2*Mp))*RAD)) + (0.057212 * Math.sin((2*D)-M-Mp)*E) + (0.053320*Math.sin((2*D + Mp)*RAD)) + (0.045874*Math.sin((2*D-M)*RAD)*E);
+        var lat = (5.128189 * Math.sin(F*RAD)) + (0.280606*Math.sin((Mp+F)*RAD)) + (0.277693*Math.sin((Mp-F)*RAD)) + (0.173238*Math.sin((2*D-F)*RAD)) + (0.055413*Math.sin((2*D+F-Mp)*RAD)) + (0.046272*Math.sin((2*D-F-Mp)*RAD)) + (0.032573*Math.sin((2*D+F)*RAD)) + (0.017198*Math.sin((2*Mp+F)*RAD)) + (0.009267*Math.sin((2*D+Mp-F)*RAD)) + (0.008823*Math.sin((2*Mp-F)*RAD));
+        //return lon;
+        return [lon, lat];
+    }
+    //Outputs phase of moon for image
+    moonPhase(){
+        var date = this.date;
+        var JD = this.julianDay();
+        //var new = moon.julianToCalendar(moon.julianDay()[0]);
+        var first = moon.julianToCalendar(moon.julianDay()[1]);
+        var full = moon.julianToCalendar(moon.julianDay()[2]);
+        var last = moon.julianToCalendar(moon.julianDay()[3]);
+        if(date < first){
+            return 0;
+        }
+        else if(date < full){
+            return 1;
+        }
+        else if(date < last){
+            return 2;
+        }
+        else{
+            return 3;
+        }
+            
     }
 }
+
+//EXAMPLE CALL FOR PROJECTION JS SCRIPT
+/*
+var moon = new LunarMath(2000);
+var phase = moon.moonPhase(); 
+var location = moon.lunarLocation(phase));
+*/
