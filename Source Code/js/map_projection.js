@@ -5,8 +5,8 @@ var star;
 window.addEventListener('load', () => {
 
 
-    var lat = localStorage.getItem("Latitude");
-    var long = localStorage.getItem("Longitude");
+    var lat = parseFloat(localStorage.getItem("Latitude"));
+    var long = parseFloat(localStorage.getItem("Longitude"));
   
     var month = parseInt(localStorage.getItem("Month"));
     var day = parseInt(localStorage.getItem("Day"));
