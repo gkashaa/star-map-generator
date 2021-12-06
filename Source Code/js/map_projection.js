@@ -1,5 +1,23 @@
-// StarMath object
-var star = new StarMath(-6.7924, 39.2083, 22.0984235779);
+// Object of the StarMath class
+var star;   
+
+// Event listener for the user input 
+window.addEventListener('load', () => {
+
+
+    var lat = localStorage.getItem("Latitude");
+    var long = localStorage.getItem("Longitude");
+  
+    var month = localStorage.getItem("Month");
+    var day = localStorage.getItem("Day");
+    var year = localStorage.getItem("Year");
+    
+    var hour = localStorage.getItem("Hour");
+    var min = localStorage.getItem("Min");
+
+    star = new StarMath(lat, long, 22.0984235779);   // Hardcoded LST
+    
+});
 
 // Dimensions of the projection
 var width = 5000;       
@@ -147,6 +165,8 @@ d3.json("https://raw.githubusercontent.com/gkashaa/star-map-generator/main/Sourc
 
     });
 }); 
+
+delete star;
 
 window.onload = function () {
   d3.select("#downLoadBtn").on("click", function () {
