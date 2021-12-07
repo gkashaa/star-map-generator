@@ -102,5 +102,5 @@ class LunarMath{
 /*
 var moon = new LunarMath(2000);
 var phase = moon.moonPhase(); 
-var location = moon.lunarLocation(phase));
+var location = moon.lunarLocation(phase);
 */
