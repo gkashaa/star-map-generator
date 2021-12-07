@@ -1,13 +1,13 @@
 class PlanetMath{
 
-    constructor(planet, YYYY, MM, DD, HH, mm, SS){
+    constructor(planet, name YYYY, MM, DD, HH, mm){
         this.planet = planet;
+	this.name = name; // name of planet
         this.YYYY = YYYY; // year
         this.MM = MM; // month
         this.DD = DD; // date
         this.HH = HH; // hour
         this.mm = mm; // minute
-        this.SS = SS; // second
         //  DD = day/hour/minutes converted to fractions of a day
         var date = this.DD + (this.HH / 24) + (this.mm / 1440);
     }
