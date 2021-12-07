@@ -37,7 +37,7 @@
                             <!--Longitude input-->     
                             <div class="form-group">
                                 <label for="longitude">Longitude: </label>
-                                <input class="myInputSpecial" type="number" id="longitudeDegs" min="-180" max="180" step="1" placeholder="deg" oninvalid="setCustomValidity('Please enteran integer between -180 and 180')" oninput="setCustomValidity('')" required> 
+                                <input class="myInputSpecial" type="number" id="longitudeDegs" min="-180" max="180" step="1" placeholder="deg" oninvalid="setCustomValidity('Please enter an integer between -180 and 180')" oninput="setCustomValidity('')" required> 
                                 <input class="myInputSpecial" type="number" id="longitudeMins" min="0" max="59" step="1" placeholder="mins" oninvalid="setCustomValidity('Please enter an integer between 0 and 59')" oninput="setCustomValidity('')" required> 
                                 <input class="myInputSpecial" type="number" id="longitudeSecs" min="0" max="59.9999" step="0.0001" placeholder="secs" oninvalid="setCustomValidity('Please enter a value up to 4 d.p. between 0 and 59.9999')" oninput="setCustomValidity('')" required>
                                 
@@ -52,12 +52,12 @@
                             <!--Date input-->
                             <div class="form-group">
                                 <label for="date">Date: </label>
-                                <input class="myInput" type="date" id="date" min="1900-01-01" max="2100-01-01" required> 
+                                <input class="myInput" type="date" id="date" min="1900-01-01" max="2100-01-01" oninvalid="setCustomValidity('Please a date between 01/01/1900 and 01/01/2100')" oninput="setCustomValidity('')" required> 
                             </div>
                             <!--Time input-->
                             <div class="form-group">
                                 <label for="time">Time: </label>
-                                <input class="myInput" type="time" id="time" required> 
+                                <input class="myInput" type="time" id="time" oninvalid="setCustomValidity('Please a valid time in local hours and minutes followed by AM or PM')" oninput="setCustomValidity('')" required> 
                             </div>
                             <!--Button to submit user input data-->
                             <input type="submit" class="butt" value="Generate">
