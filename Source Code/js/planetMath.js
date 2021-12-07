@@ -1,6 +1,6 @@
 class PlanetMath{
 
-    constructor(planet, name YYYY, MM, DD, HH, mm){
+    constructor(planet, name, YYYY, MM, DD, HH, mm){
         this.planet = planet;
 	this.name = name; // name of planet
         this.YYYY = YYYY; // year
@@ -239,7 +239,7 @@ function trueAnomaly(M, e1){
 // Example call of planet math
 
 /*
-var mercury = new PlanetMath(1, 2000, 4, 4, 6, 8, 10);
+var mercury = new PlanetMath(1, "Mercury", 2000, 4, 4, 6, 8, 10);
 console.log("Mercury");
 console.log(mercury.majorOrbits());
 delete mercury;
