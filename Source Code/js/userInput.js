@@ -12,9 +12,20 @@ function getUserInput() {
 
     // Date (MM-DD-YYYY)
     var date = document.getElementById('date').value;
+    var YYYY = date.slice(0, 4);
+    var MM = date.slice(5, 7);
+    var DD = date.slice(8, 10);
     
-    // Time (24 hour format)
+    // Time (12 hour format)
     var time = document.getElementById('time').value;
+    var HH = time.slice(0, 2);
+    var mm = time.slice(3, 5);
+    var AP = time.slice(6, 8);
+    
+    // Convert time to 24 hour format
+    if (AP === "PM") {
+        HH = HH + 12;
+    }
 
     // Directions for latitude and longitude
     var latDir, longDir;
@@ -45,8 +56,13 @@ function getUserInput() {
     // Store inputs into local storage
     localStorage.setItem("Latitude", lat);
     localStorage.setItem("Longitude", long);
-    localStorage.setItem("Date", date);
-    localStorage.setItem("Time", time);
+    
+    localStorage.setItem("Year", YYYY);
+    localStorage.setItem("Month", MM);
+    localStorage.setItem("Day", DD);
+  
+    localStorage.setItem("Hour", HH);
+    localStorage.setItem("Min", mm);
 
     return;
     
