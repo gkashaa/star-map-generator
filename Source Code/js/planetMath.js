@@ -1,15 +1,17 @@
 class PlanetMath{
 
-    constructor(planet, name, YYYY, MM, DD, HH, mm){
+    constructor(planet, name, YYYY, MM, DD, HH, mm, lat, lon){
         this.planet = planet;
-	this.name = name; // name of planet
+	    this.name = name; // name of planet
         this.YYYY = YYYY; // year
         this.MM = MM; // month
         this.DD = DD; // date
         this.HH = HH; // hour
         this.mm = mm; // minute
+        this.lat = lat;
+        this.lon = lon;
         //  DD = day/hour/minutes converted to fractions of a day
-        var date = this.DD + (this.HH / 24) + (this.mm / 1440);
+        var date = this.DD + (this.HH + this.mm/60) / 24;
     }
 
     julianDay(){
@@ -42,17 +44,17 @@ class PlanetMath{
         var cy = JD2k / 36525;
         return [JD2k, cy];
     }
-    
+
     majorOrbits(){
-        
+
         var JD = this.julianDay();
         var temp = this.julianDay2000();
         var JD2k = temp[0];
         var cy = temp[1];
-        
+
         var RADS = Math.PI / 180.0;
         var DEGS = 180 / Math.PI;
-        
+
         var L, a, e, i, w, Omega;
 
 
@@ -200,7 +202,81 @@ class PlanetMath{
 
         return [rightAscension, Declination, Dist];
     }
-    
+    meanSiderealTime(){
+        var year = this.YYYY;
+        var month = this.MM;
+        var day = this.DD;
+        var hour = this.HH;
+        var min = this.mm;
+        var sec = 0;
+
+        if(month <= 2){
+            year = year - 1;
+            month = month + 12;
+        }
+        var a = Math.floor(year / 100.0);
+        var b = 2 - a + Math.floor(a / 4);
+        var c = Math.floor(365.25 * year);
+        var d = Math.floor(30.6001 * (month + 1));
+        // Get days since J2000.0
+        var jd = b + c + d - 730550.5 + day + (hour + min/60 + sec/3600) / 24;
+        // Get Julian centuries since J2000.0
+        var jt = jd / 36525.0;
+        // Calculate initial Mean Sidereal Time(mst)
+        var mst = 280.46061837 + (360.98564736629 * jd) + (0.000387933 * Math.pow(jt, 2)) - (Math.pow(jt, 3) / 38710000) + this.lon;
+        // Clip mst to range 0.0 to 360.0
+        if(mst > 0.0){
+          while(mst > 360.0) mst = mst - 360.0;
+        }
+        else{
+          while(mst < 0.0) mst = mst + 360.0;
+        }
+        return mst;
+    }
+
+    altitudeAzimuth(){
+        var lat = this.lat;
+        var lon = this.lon;
+        var RADS = Math.PI / 180.0;
+        var DEGS = 180 / Math.PI;
+
+        var temp = this.majorOrbits();
+        var ra = temp[0];
+        var dec = temp[1];
+
+        var hourAngle = this.meanSiderealTime() - temp[0];
+        if(hourAngle < 0) hourAngle = hourAngle + 360;
+
+        // Convert degrees to radians
+        var decRad = dec * RADS;
+        var latRad = lat * RADS;
+
+        var hrRad = hourAngle * RADS;
+
+        // Calculate altitude in radians
+        var sinAlt = (Math.sin(decRad) * Math.sin(latRad)) + (Math.cos(decRad) * Math.cos(latRad) * Math.cos(hrRad));
+        var alt = Math.asin(sinAlt);
+
+        // Calculate azimuth in radians
+        var az;
+        try{
+            var cosAz = (Math.sin(decRad) - Math.sin(alt) * Math.sin(latRad)) / (Math.cos(alt) * Math.cos(latRad));
+            az = Math.acos(cosAz);
+        }
+        catch{
+            az = 0;
+        }
+
+        // Convert altitude and azimuth to degrees
+        alt = alt * DEGS
+        az = az * DEGS
+
+        if(Math.sin(hrRad) > 0.0) az = 360.0 - az;
+
+        return [az, alt];
+
+    }
+
 
 }
 function mod2Pi(X){
@@ -239,8 +315,8 @@ function trueAnomaly(M, e1){
 // Example call of planet math
 
 /*
-var mercury = new PlanetMath(1, "Mercury", 2000, 4, 4, 6, 8, 10);
+var mercury = new PlanetMath(1, "Mercury", 2000, 4, 4, 6, 8, 10, 10, 10);
 console.log("Mercury");
 console.log(mercury.majorOrbits());
-delete mercury;
+console.log(mercury.altitudeAzimuth());
 */
