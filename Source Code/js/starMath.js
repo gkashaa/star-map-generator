@@ -1,3 +1,4 @@
+// Colton Cappa, Gloria Kashaa, Jared Nicoll, Leonie Nutz
 class StarMath{
 
     // Parameters will be changed to lat, long, date, and time
