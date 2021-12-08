@@ -1,3 +1,4 @@
+// Colton Cappa, Gloria Kashaa, Jared Nicoll, Leonie Nutz
 // script for real time form validation and pre-set location select and save functionality
 let locations;
 
