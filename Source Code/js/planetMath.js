@@ -1,3 +1,4 @@
+// Colton Cappa, Gloria Kashaa, Jared Nicoll, Leonie Nutz
 class PlanetMath{
 
     constructor(planet, name, YYYY, MM, DD, HH, mm, lat, lon){
