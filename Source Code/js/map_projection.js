@@ -51,7 +51,7 @@ window.addEventListener('load', () => {
 
     moon = new LunarMath(date);
     var moonPhase = moon.moonPhase();
-    
+    console.log(moonPhase);
     if(moonPhase == 0){
         document.getElementById("imgID").src="newmoon.png";
     }
