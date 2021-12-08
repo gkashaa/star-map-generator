@@ -168,11 +168,11 @@ d3.csv("https://raw.githubusercontent.com/gkashaa/star-map-generator/main/Source
 
 
     // Checkbox to show/hide star labels
-    var checkbox = document.getElementById('starLabel');
+    var star_box = document.getElementById('starLabel');
 
 
     // Checkbox listener for the star label checkbox
-    checkbox.addEventListener('change', (event) => {
+    star_box.addEventListener('change', (event) => {
         if (event.currentTarget.checked) {
           star_name.attr("opacity", 1);        // Show labels if checkbox is checked
         } else {
@@ -181,7 +181,7 @@ d3.csv("https://raw.githubusercontent.com/gkashaa/star-map-generator/main/Source
     });
 
 
-
+});
 
 
 
@@ -207,7 +207,7 @@ d3.json("https://raw.githubusercontent.com/gkashaa/star-map-generator/main/Sourc
 
 
     // Add the constellation names
-    var con_name = svg.selectAll("#figure_text")
+    var con_name = svg.selectAll("#con")
         .data(cons)
         .enter()
         .append("text")
@@ -219,11 +219,11 @@ d3.json("https://raw.githubusercontent.com/gkashaa/star-map-generator/main/Sourc
 
 
     // Checkbox to show/hide constellation labels
-    var checkbox_2 = document.getElementById('constellationLabel');
+    var con_box = document.getElementById('constellationLabel');
 
 
     // Checkbox listener for the constellation label checkbox
-    checkbox_2.addEventListener('change', (event) => {
+    con_box.addEventListener('change', (event) => {
         if (event.currentTarget.checked) {
           con_name.attr("opacity", 1);        // Show labels if checkbox is checked
         } else {
@@ -231,10 +231,54 @@ d3.json("https://raw.githubusercontent.com/gkashaa/star-map-generator/main/Sourc
         }
       });
 
-
-
-    });
+    
 });
+
+d3.csv("https://raw.githubusercontent.com/gkashaa/star-map-generator/main/Source%20Code/messier.csv", function(error, messier) {
+    if (error) throw error;
+    
+    // Add the messier objects to the map projection
+    svg.selectAll("circle")
+		.data(messier)
+                .enter()
+		.append("circle")
+		.attr("cx", function (d) { return projection(star.azimuthElevation(d.ra, d.dec))[0]; }) // Right Acension -> Azimuth
+
+		.attr("cy", function (d) { return projection(star.azimuthElevation(d.ra, d.dec))[1]; }) // Declination -> Altitide
+
+		.attr("r", "8px")  // Magnitude of the messier objecrs
+		.attr("fill", "orange");
+
+
+
+
+    // Add the name for each star
+    var messier_name = svg.selectAll("#messier")
+               .data(messier)
+               .enter()
+               .append("text")
+               .attr("x", d => projection(star.azimuthElevation(d.ra, d.dec))[0] + 10)
+               .attr("y", d => projection(star.azimuthElevation(d.ra, d.dec))[1])
+               .style("fill", "orange")
+               .text((d) => d.id);
+
+
+    // Checkbox to show/hide star labels
+    var messier_box = document.getElementById('messierLabel');
+
+
+    // Checkbox listener for the messier label checkbox
+    messier_box.addEventListener('change', (event) => {
+        if (event.currentTarget.checked) {
+          messier_name.attr("opacity", 1);        // Show labels if checkbox is checked
+        } else {
+          messier_name.attr("opacity", 0);        // Hide labels if checkbox is unchecked
+        }
+    });
+    
+
+});
+
 
 delete star;                                // Delete star object
 delete p1, p2, p3, p4, p5, p6, p7, p8, p9;  // Delete planet objects
