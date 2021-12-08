@@ -1,3 +1,5 @@
+// Colton Cappa, Gloria Kashaa, Jared Nicoll, Leonie Nutz
+
 var p1, p2, p3, p4, p5, p6, p7, p8, p9;		//Objects of the PlanetMath class
 var star;					//Object of the StarMath class
 var moon;					//Object of the lunarMath class
