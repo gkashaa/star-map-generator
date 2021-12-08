@@ -50,6 +50,21 @@ window.addEventListener('load', () => {
     planetArray[7] = p9.altitudeAzimuth();
 
     moon = new LunarMath(date);
+    var moonPhase = moon.moonPhase();
+    console.log(moonPhase);
+    if(moonPhase == 0){
+        document.getElementById("imgID").src="newmoon.png";
+    }
+    else if(moonPhase == 1){
+        document.getElementById("imgID").src="firstquarter.png";
+        }
+    else if(moonPhase == 2){
+        document.getElementById("imgID").src="fullmoon.png";
+    }
+    else{
+        document.getElementById("imgID").src="thirdquarter.png";
+    }
+
 
     // Draw the planets
         var planets = svg.selectAll("circle")
@@ -86,8 +101,6 @@ window.addEventListener('load', () => {
             });
 
         });
-
-
 
 
 
@@ -233,12 +246,12 @@ d3.json("https://raw.githubusercontent.com/gkashaa/star-map-generator/main/Sourc
         }
       });
 
-    
+
 });
 
 d3.csv("https://raw.githubusercontent.com/gkashaa/star-map-generator/main/Source%20Code/messier.csv", function(error, messier) {
     if (error) throw error;
-    
+
     // Add the messier objects to the map projection
     svg.selectAll("circle")
 		.data(messier)
@@ -277,7 +290,7 @@ d3.csv("https://raw.githubusercontent.com/gkashaa/star-map-generator/main/Source
           messier_name.attr("opacity", 0);        // Hide labels if checkbox is unchecked
         }
     });
-    
+
 
 });
 
