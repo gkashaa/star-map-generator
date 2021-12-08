@@ -2,7 +2,7 @@ class PlanetMath{
 
     constructor(planet, name, YYYY, MM, DD, HH, mm, lat, lon){
         this.planet = planet;
-	this.name = name; // name of planet
+	    this.name = name; // name of planet
         this.YYYY = YYYY; // year
         this.MM = MM; // month
         this.DD = DD; // date
@@ -273,7 +273,7 @@ class PlanetMath{
 
         if(Math.sin(hrRad) > 0.0) az = 360.0 - az;
 
-        return [az, alt];
+        return [az, alt, this.name];
 
     }
 
