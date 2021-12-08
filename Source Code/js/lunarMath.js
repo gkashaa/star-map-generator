@@ -1,3 +1,4 @@
+// Colton Cappa, Gloria Kashaa, Jared Nicoll, Leonie Nutz
 class LunarMath{
     constructor(date){
     this.date = date;
