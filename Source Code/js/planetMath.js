@@ -2,7 +2,7 @@ class PlanetMath{
 
     constructor(planet, name, YYYY, MM, DD, HH, mm, lat, lon){
         this.planet = planet;
-	    this.name = name; // name of planet
+	this.name = name; // name of planet
         this.YYYY = YYYY; // year
         this.MM = MM; // month
         this.DD = DD; // date
