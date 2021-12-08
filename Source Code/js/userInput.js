@@ -1,3 +1,4 @@
+// Colton Cappa, Gloria Kashaa, Jared Nicoll, Leonie Nutz
 function getUserInput() {
     
     // Latitude in DMS format
